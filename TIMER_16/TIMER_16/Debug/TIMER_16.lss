@@ -1,0 +1,870 @@
+
+TIMER_16.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000537  2**0
+                  ALLOC, LOAD, DATA
+  1 .text         000000c8  00000000  00000000  000000b4  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      0000002f  00000000  00000000  00000537  2**0
+                  CONTENTS, READONLY
+  3 .stack.descriptors.hdr 00000038  00000000  00000000  00000566  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000a8  00000000  00000000  0000059e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000fc3  00000000  00000000  00000646  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007dd  00000000  00000000  00001609  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000557  00000000  00000000  00001de6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000204  00000000  00000000  00002340  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000221  00000000  00000000  00002544  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000005b7  00000000  00000000  00002765  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000b8  00000000  00000000  00002d1c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .text         00000004  00000470  00000470  00000524  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 13 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00002dd4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .text.__vector_12 00000032  00000394  00000394  00000448  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 15 .text.__vector_13 00000040  00000316  00000316  000003ca  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 16 .text.__vector_11 0000004e  0000023c  0000023c  000002f0  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 17 .text.__vector_10 00000048  0000028a  0000028a  0000033e  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 18 .text.squera  00000030  000003c6  000003c6  0000047a  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 19 .text.triangle 0000003e  00000356  00000356  0000040a  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 20 .text.main    000000a2  000000c8  000000c8  0000017c  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 21 .bss.counter  00000001  00800184  00800184  00000537  2**0
+                  ALLOC
+ 22 .data.toogle_D 00000001  00800185  0000047e  00000532  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+ 23 .data.toogle_A 00000001  00800186  0000047f  00000533  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+ 24 .data.toogle_C 00000001  00800187  00000480  00000534  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+ 25 .data.toogle_B 00000001  00800188  00000481  00000535  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+ 26 .text.__vector_18 00000070  0000016a  0000016a  0000021e  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 27 .text.__vector_20 0000001e  000003f6  000003f6  000004aa  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 28 .text.uart_init 00000062  000001da  000001da  0000028e  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 29 .text.uart_send_byte 00000012  0000045e  0000045e  00000512  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 30 .bss.rx_write_pos.1652 00000002  00800180  00800180  00000537  2**0
+                  ALLOC
+ 31 .data.uart_tx_busy 00000001  00800189  00000482  00000536  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+ 32 .bss.rx_count 00000002  00800182  00800182  00000537  2**0
+                  ALLOC
+ 33 .bss.rx_buffer 00000080  00800100  00800100  00000537  2**0
+                  ALLOC
+ 34 .text.libgcc.div 00000044  000002d2  000002d2  00000386  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 35 .text.libgcc.mul 00000016  00000432  00000432  000004e6  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 36 .text.libgcc.mul 0000001e  00000414  00000414  000004c8  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 37 .text.__dummy_fini 00000002  00000478  00000478  0000052c  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 38 .text.__dummy_funcs_on_exit 00000002  0000047a  0000047a  0000052e  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 39 .text.__dummy_simulator_exit 00000002  0000047c  0000047c  00000530  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 40 .text.exit    00000016  00000448  00000448  000004fc  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 41 .text._Exit   00000004  00000474  00000474  00000528  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 3a 00 	jmp	0x74	; 0x74 <__ctors_end>
+   4:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+   8:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+   c:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  10:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  14:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  18:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  1c:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  20:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  24:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  28:	0c 94 45 01 	jmp	0x28a	; 0x28a <__vector_10>
+  2c:	0c 94 1e 01 	jmp	0x23c	; 0x23c <__vector_11>
+  30:	0c 94 ca 01 	jmp	0x394	; 0x394 <__vector_12>
+  34:	0c 94 8b 01 	jmp	0x316	; 0x316 <__vector_13>
+  38:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  3c:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  40:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  44:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  48:	0c 94 b5 00 	jmp	0x16a	; 0x16a <__vector_18>
+  4c:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  50:	0c 94 fb 01 	jmp	0x3f6	; 0x3f6 <__vector_20>
+  54:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  58:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  5c:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  60:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+  64:	0c 94 38 02 	jmp	0x470	; 0x470 <__bad_interrupt>
+
+00000068 <.dinit>:
+  68:	01 00       	.word	0x0001	; ????
+  6a:	01 85       	ldd	r16, Z+9	; 0x09
+  6c:	80 01       	movw	r16, r0
+  6e:	85 01       	movw	r16, r10
+  70:	8a 00       	.word	0x008a	; ????
+  72:	04 7e       	andi	r16, 0xE4	; 228
+
+00000074 <__ctors_end>:
+  74:	11 24       	eor	r1, r1
+  76:	1f be       	out	0x3f, r1	; 63
+  78:	cf ef       	ldi	r28, 0xFF	; 255
+  7a:	d8 e0       	ldi	r29, 0x08	; 8
+  7c:	de bf       	out	0x3e, r29	; 62
+  7e:	cd bf       	out	0x3d, r28	; 61
+
+00000080 <__do_copy_data>:
+  80:	e8 e6       	ldi	r30, 0x68	; 104
+  82:	f0 e0       	ldi	r31, 0x00	; 0
+  84:	40 e0       	ldi	r20, 0x00	; 0
+  86:	17 c0       	rjmp	.+46     	; 0xb6 <__do_clear_bss+0x8>
+  88:	b5 91       	lpm	r27, Z+
+  8a:	a5 91       	lpm	r26, Z+
+  8c:	35 91       	lpm	r19, Z+
+  8e:	25 91       	lpm	r18, Z+
+  90:	05 91       	lpm	r16, Z+
+  92:	07 fd       	sbrc	r16, 7
+  94:	0c c0       	rjmp	.+24     	; 0xae <__do_clear_bss>
+  96:	95 91       	lpm	r25, Z+
+  98:	85 91       	lpm	r24, Z+
+  9a:	ef 01       	movw	r28, r30
+  9c:	f9 2f       	mov	r31, r25
+  9e:	e8 2f       	mov	r30, r24
+  a0:	05 90       	lpm	r0, Z+
+  a2:	0d 92       	st	X+, r0
+  a4:	a2 17       	cp	r26, r18
+  a6:	b3 07       	cpc	r27, r19
+  a8:	d9 f7       	brne	.-10     	; 0xa0 <__do_copy_data+0x20>
+  aa:	fe 01       	movw	r30, r28
+  ac:	04 c0       	rjmp	.+8      	; 0xb6 <__do_clear_bss+0x8>
+
+000000ae <__do_clear_bss>:
+  ae:	1d 92       	st	X+, r1
+  b0:	a2 17       	cp	r26, r18
+  b2:	b3 07       	cpc	r27, r19
+  b4:	e1 f7       	brne	.-8      	; 0xae <__do_clear_bss>
+  b6:	e4 37       	cpi	r30, 0x74	; 116
+  b8:	f4 07       	cpc	r31, r20
+  ba:	31 f7       	brne	.-52     	; 0x88 <__do_copy_data+0x8>
+  bc:	0e 94 64 00 	call	0xc8	; 0xc8 <_etext>
+  c0:	0c 94 24 02 	jmp	0x448	; 0x448 <exit>
+
+000000c4 <_exit>:
+  c4:	f8 94       	cli
+
+000000c6 <__stop_program>:
+  c6:	ff cf       	rjmp	.-2      	; 0xc6 <__stop_program>
+
+Disassembly of section .text:
+
+00000470 <__bad_interrupt>:
+ 470:	0c 94 00 00 	jmp	0	; 0x0 <__TEXT_REGION_ORIGIN__>
+
+Disassembly of section .text.__vector_12:
+
+00000394 <__vector_12>:
+/*
+// triangle(uint8_t height);
+// squera(uint8_t height);
+*/
+
+ISR(TIMER1_COMPB_vect){//1110  //A ve B nin ilk ayrýlýklarýnda aktik oluyor
+ 394:	1f 92       	push	r1
+ 396:	0f 92       	push	r0
+ 398:	0f b6       	in	r0, 0x3f	; 63
+ 39a:	0f 92       	push	r0
+ 39c:	11 24       	eor	r1, r1
+ 39e:	8f 93       	push	r24
+ 3a0:	9f 93       	push	r25
+	PORTB = (PORTB & 0xFE) | (toogle_A<<0);
+ 3a2:	85 b1       	in	r24, 0x05	; 5
+ 3a4:	90 91 86 01 	lds	r25, 0x0186	; 0x800186 <toogle_A>
+ 3a8:	8e 7f       	andi	r24, 0xFE	; 254
+ 3aa:	89 2b       	or	r24, r25
+ 3ac:	85 b9       	out	0x05, r24	; 5
+	toogle_A = ~toogle_A;
+ 3ae:	80 91 86 01 	lds	r24, 0x0186	; 0x800186 <toogle_A>
+ 3b2:	80 95       	com	r24
+ 3b4:	80 93 86 01 	sts	0x0186, r24	; 0x800186 <toogle_A>
+	//counter++;
+	
+}
+ 3b8:	9f 91       	pop	r25
+ 3ba:	8f 91       	pop	r24
+ 3bc:	0f 90       	pop	r0
+ 3be:	0f be       	out	0x3f, r0	; 63
+ 3c0:	0f 90       	pop	r0
+ 3c2:	1f 90       	pop	r1
+ 3c4:	18 95       	reti
+
+Disassembly of section .text.__vector_13:
+
+00000316 <__vector_13>:
+
+ISR(TIMER1_OVF_vect){//1101
+ 316:	1f 92       	push	r1
+ 318:	0f 92       	push	r0
+ 31a:	0f b6       	in	r0, 0x3f	; 63
+ 31c:	0f 92       	push	r0
+ 31e:	11 24       	eor	r1, r1
+ 320:	2f 93       	push	r18
+ 322:	8f 93       	push	r24
+ 324:	9f 93       	push	r25
+	PORTB = (PORTB & 0xFD) | (toogle_B<<1);
+ 326:	25 b1       	in	r18, 0x05	; 5
+ 328:	90 91 88 01 	lds	r25, 0x0188	; 0x800188 <toogle_B>
+ 32c:	89 2f       	mov	r24, r25
+ 32e:	90 e0       	ldi	r25, 0x00	; 0
+ 330:	88 0f       	add	r24, r24
+ 332:	99 1f       	adc	r25, r25
+ 334:	92 2f       	mov	r25, r18
+ 336:	9d 7f       	andi	r25, 0xFD	; 253
+ 338:	89 2b       	or	r24, r25
+ 33a:	85 b9       	out	0x05, r24	; 5
+	toogle_B = ~toogle_B;
+ 33c:	80 91 88 01 	lds	r24, 0x0188	; 0x800188 <toogle_B>
+ 340:	80 95       	com	r24
+ 342:	80 93 88 01 	sts	0x0188, r24	; 0x800188 <toogle_B>
+	//counter++;
+	
+}
+ 346:	9f 91       	pop	r25
+ 348:	8f 91       	pop	r24
+ 34a:	2f 91       	pop	r18
+ 34c:	0f 90       	pop	r0
+ 34e:	0f be       	out	0x3f, r0	; 63
+ 350:	0f 90       	pop	r0
+ 352:	1f 90       	pop	r1
+ 354:	18 95       	reti
+
+Disassembly of section .text.__vector_11:
+
+0000023c <__vector_11>:
+
+
+ISR(TIMER1_COMPA_vect){//1011
+ 23c:	1f 92       	push	r1
+ 23e:	0f 92       	push	r0
+ 240:	0f b6       	in	r0, 0x3f	; 63
+ 242:	0f 92       	push	r0
+ 244:	11 24       	eor	r1, r1
+ 246:	2f 93       	push	r18
+ 248:	8f 93       	push	r24
+ 24a:	9f 93       	push	r25
+	PORTB = (PORTB & 0xFB) | (toogle_C<<2);
+ 24c:	25 b1       	in	r18, 0x05	; 5
+ 24e:	90 91 87 01 	lds	r25, 0x0187	; 0x800187 <toogle_C>
+ 252:	89 2f       	mov	r24, r25
+ 254:	90 e0       	ldi	r25, 0x00	; 0
+ 256:	88 0f       	add	r24, r24
+ 258:	99 1f       	adc	r25, r25
+ 25a:	88 0f       	add	r24, r24
+ 25c:	99 1f       	adc	r25, r25
+ 25e:	92 2f       	mov	r25, r18
+ 260:	9b 7f       	andi	r25, 0xFB	; 251
+ 262:	89 2b       	or	r24, r25
+ 264:	85 b9       	out	0x05, r24	; 5
+	toogle_C = ~toogle_C;
+ 266:	80 91 87 01 	lds	r24, 0x0187	; 0x800187 <toogle_C>
+ 26a:	80 95       	com	r24
+ 26c:	80 93 87 01 	sts	0x0187, r24	; 0x800187 <toogle_C>
+	counter++;
+ 270:	80 91 84 01 	lds	r24, 0x0184	; 0x800184 <counter>
+ 274:	8f 5f       	subi	r24, 0xFF	; 255
+ 276:	80 93 84 01 	sts	0x0184, r24	; 0x800184 <counter>
+	
+}
+ 27a:	9f 91       	pop	r25
+ 27c:	8f 91       	pop	r24
+ 27e:	2f 91       	pop	r18
+ 280:	0f 90       	pop	r0
+ 282:	0f be       	out	0x3f, r0	; 63
+ 284:	0f 90       	pop	r0
+ 286:	1f 90       	pop	r1
+ 288:	18 95       	reti
+
+Disassembly of section .text.__vector_10:
+
+0000028a <__vector_10>:
+ISR(TIMER1_CAPT_vect){//0111
+ 28a:	1f 92       	push	r1
+ 28c:	0f 92       	push	r0
+ 28e:	0f b6       	in	r0, 0x3f	; 63
+ 290:	0f 92       	push	r0
+ 292:	11 24       	eor	r1, r1
+ 294:	2f 93       	push	r18
+ 296:	8f 93       	push	r24
+ 298:	9f 93       	push	r25
+	PORTB = (PORTB & 0xF7) | (toogle_D<<3);
+ 29a:	25 b1       	in	r18, 0x05	; 5
+ 29c:	90 91 85 01 	lds	r25, 0x0185	; 0x800185 <toogle_D>
+ 2a0:	89 2f       	mov	r24, r25
+ 2a2:	90 e0       	ldi	r25, 0x00	; 0
+ 2a4:	88 0f       	add	r24, r24
+ 2a6:	99 1f       	adc	r25, r25
+ 2a8:	88 0f       	add	r24, r24
+ 2aa:	99 1f       	adc	r25, r25
+ 2ac:	88 0f       	add	r24, r24
+ 2ae:	99 1f       	adc	r25, r25
+ 2b0:	92 2f       	mov	r25, r18
+ 2b2:	97 7f       	andi	r25, 0xF7	; 247
+ 2b4:	89 2b       	or	r24, r25
+ 2b6:	85 b9       	out	0x05, r24	; 5
+	toogle_D = ~toogle_D;
+ 2b8:	80 91 85 01 	lds	r24, 0x0185	; 0x800185 <toogle_D>
+ 2bc:	80 95       	com	r24
+ 2be:	80 93 85 01 	sts	0x0185, r24	; 0x800185 <toogle_D>
+	//counter++;
+	
+}
+ 2c2:	9f 91       	pop	r25
+ 2c4:	8f 91       	pop	r24
+ 2c6:	2f 91       	pop	r18
+ 2c8:	0f 90       	pop	r0
+ 2ca:	0f be       	out	0x3f, r0	; 63
+ 2cc:	0f 90       	pop	r0
+ 2ce:	1f 90       	pop	r1
+ 2d0:	18 95       	reti
+
+Disassembly of section .text.squera:
+
+000003c6 <squera>:
+
+void squera(uint8_t height){
+ 3c6:	1f 93       	push	r17
+ 3c8:	cf 93       	push	r28
+ 3ca:	df 93       	push	r29
+ 3cc:	d8 2f       	mov	r29, r24
+	char c ='O';
+	for (char ii=0; ii<height ;ii++ )
+ 3ce:	10 e0       	ldi	r17, 0x00	; 0
+ 3d0:	0c c0       	rjmp	.+24     	; 0x3ea <squera+0x24>
+	{
+		for (char jj=0; jj<= height ;jj++)
+		{
+			uart_send_byte(c);
+ 3d2:	8f e4       	ldi	r24, 0x4F	; 79
+ 3d4:	0e 94 2f 02 	call	0x45e	; 0x45e <uart_send_byte>
+
+void squera(uint8_t height){
+	char c ='O';
+	for (char ii=0; ii<height ;ii++ )
+	{
+		for (char jj=0; jj<= height ;jj++)
+ 3d8:	cf 5f       	subi	r28, 0xFF	; 255
+ 3da:	01 c0       	rjmp	.+2      	; 0x3de <squera+0x18>
+ 3dc:	c0 e0       	ldi	r28, 0x00	; 0
+ 3de:	dc 17       	cp	r29, r28
+ 3e0:	c0 f7       	brcc	.-16     	; 0x3d2 <squera+0xc>
+		{
+			uart_send_byte(c);
+		}
+	uart_send_byte('\r');
+ 3e2:	8d e0       	ldi	r24, 0x0D	; 13
+ 3e4:	0e 94 2f 02 	call	0x45e	; 0x45e <uart_send_byte>
+	
+}
+
+void squera(uint8_t height){
+	char c ='O';
+	for (char ii=0; ii<height ;ii++ )
+ 3e8:	1f 5f       	subi	r17, 0xFF	; 255
+ 3ea:	1d 17       	cp	r17, r29
+ 3ec:	b8 f3       	brcs	.-18     	; 0x3dc <squera+0x16>
+		{
+			uart_send_byte(c);
+		}
+	uart_send_byte('\r');
+	}
+}
+ 3ee:	df 91       	pop	r29
+ 3f0:	cf 91       	pop	r28
+ 3f2:	1f 91       	pop	r17
+ 3f4:	08 95       	ret
+
+Disassembly of section .text.triangle:
+
+00000356 <triangle>:
+ 
+void triangle(int8_t height){
+ 356:	1f 93       	push	r17
+ 358:	cf 93       	push	r28
+ 35a:	df 93       	push	r29
+ 35c:	18 2f       	mov	r17, r24
+	char c ='O';
+	for (char ii=0; ii<height ;ii++ )
+ 35e:	d0 e0       	ldi	r29, 0x00	; 0
+ 360:	0c c0       	rjmp	.+24     	; 0x37a <triangle+0x24>
+	{
+		for (char jj=0; jj<=ii ;jj++)
+		{
+			uart_send_byte(c);
+ 362:	8f e4       	ldi	r24, 0x4F	; 79
+ 364:	0e 94 2f 02 	call	0x45e	; 0x45e <uart_send_byte>
+ 
+void triangle(int8_t height){
+	char c ='O';
+	for (char ii=0; ii<height ;ii++ )
+	{
+		for (char jj=0; jj<=ii ;jj++)
+ 368:	cf 5f       	subi	r28, 0xFF	; 255
+ 36a:	01 c0       	rjmp	.+2      	; 0x36e <triangle+0x18>
+ 36c:	c0 e0       	ldi	r28, 0x00	; 0
+ 36e:	dc 17       	cp	r29, r28
+ 370:	c0 f7       	brcc	.-16     	; 0x362 <triangle+0xc>
+		{
+			uart_send_byte(c);
+		}
+	uart_send_byte('\r');
+ 372:	8d e0       	ldi	r24, 0x0D	; 13
+ 374:	0e 94 2f 02 	call	0x45e	; 0x45e <uart_send_byte>
+	}
+}
+ 
+void triangle(int8_t height){
+	char c ='O';
+	for (char ii=0; ii<height ;ii++ )
+ 378:	df 5f       	subi	r29, 0xFF	; 255
+ 37a:	8d 2f       	mov	r24, r29
+ 37c:	90 e0       	ldi	r25, 0x00	; 0
+ 37e:	21 2f       	mov	r18, r17
+ 380:	01 2e       	mov	r0, r17
+ 382:	00 0c       	add	r0, r0
+ 384:	33 0b       	sbc	r19, r19
+ 386:	82 17       	cp	r24, r18
+ 388:	93 07       	cpc	r25, r19
+ 38a:	84 f3       	brlt	.-32     	; 0x36c <triangle+0x16>
+		{
+			uart_send_byte(c);
+		}
+	uart_send_byte('\r');
+	}
+}
+ 38c:	df 91       	pop	r29
+ 38e:	cf 91       	pop	r28
+ 390:	1f 91       	pop	r17
+ 392:	08 95       	ret
+
+Disassembly of section .text.main:
+
+000000c8 <main>:
+
+int main(void)
+{
+	
+	DDRB = 0xF;//(portB 0 1 2 output)
+  c8:	8f e0       	ldi	r24, 0x0F	; 15
+  ca:	84 b9       	out	0x04, r24	; 4
+	//  1     1     1     0    ICR1       BOTTOM                  TOP                       CTC
+	//CS12  CS11  CS10  Prescaler
+	//  0    1     1      64
+	//COM1A1  COM1A0  COM1B1  COM1B0     (For Fast PWM Compare Mode)
+	//  1       0       1       0    Set OC1A/OC1B on compare match, clear OC1A/OC1B at	BOTTOM (non-inverting mode)
+	TCCR1B |= (3<<WGM12) | (3<<CS10);
+  cc:	e1 e8       	ldi	r30, 0x81	; 129
+  ce:	f0 e0       	ldi	r31, 0x00	; 0
+  d0:	80 81       	ld	r24, Z
+  d2:	8b 61       	ori	r24, 0x1B	; 27
+  d4:	80 83       	st	Z, r24
+	TCCR1A |= (2<<WGM10) | (10<<COM1B0);
+  d6:	e0 e8       	ldi	r30, 0x80	; 128
+  d8:	f0 e0       	ldi	r31, 0x00	; 0
+  da:	80 81       	ld	r24, Z
+  dc:	82 6a       	ori	r24, 0xA2	; 162
+  de:	80 83       	st	Z, r24
+
+	
+	//clk =(16E6)^-1 prescaler =64 => Target ferq : 250000    1ms takes 250 cycle 
+	OCR1B = (25*17)-1;// (1.7)ms  ;((1<<15)-1)-(125*13)-1;//10ms = 250*10/4E-6 sec
+  e0:	88 ea       	ldi	r24, 0xA8	; 168
+  e2:	91 e0       	ldi	r25, 0x01	; 1
+  e4:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+  e8:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+	ICR1 = (25*200)-1;// (20)ms  31ms = 250*31/4E-6  sec
+  ec:	87 e8       	ldi	r24, 0x87	; 135
+  ee:	93 e1       	ldi	r25, 0x13	; 19
+  f0:	90 93 87 00 	sts	0x0087, r25	; 0x800087 <__TEXT_REGION_LENGTH__+0x7f8087>
+  f4:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <__TEXT_REGION_LENGTH__+0x7f8086>
+	OCR1A = (25*13)-1;//  (1.3)ms   ((1<<15)-1)-((125*21)-1);//72ms = 250*72/4E-6 sec  top = ocr1a
+  f8:	84 e4       	ldi	r24, 0x44	; 68
+  fa:	91 e0       	ldi	r25, 0x01	; 1
+  fc:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ 100:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+	
+	TIMSK1 |=(1<<ICIE1) |(1<<OCIE1B) | (1<<OCIE1A) |(1<<TOIE1);// Set Enable (overflov)
+ 104:	ef e6       	ldi	r30, 0x6F	; 111
+ 106:	f0 e0       	ldi	r31, 0x00	; 0
+ 108:	80 81       	ld	r24, Z
+ 10a:	87 62       	ori	r24, 0x27	; 39
+ 10c:	80 83       	st	Z, r24
+	
+	//uint8_t start[] = "Program Start\n\r";
+	
+	
+	uart_init(9600,0);
+ 10e:	40 e0       	ldi	r20, 0x00	; 0
+ 110:	60 e8       	ldi	r22, 0x80	; 128
+ 112:	75 e2       	ldi	r23, 0x25	; 37
+ 114:	80 e0       	ldi	r24, 0x00	; 0
+ 116:	90 e0       	ldi	r25, 0x00	; 0
+ 118:	0e 94 ed 00 	call	0x1da	; 0x1da <uart_init>
+	//uart_send_string(start);
+	
+	sei();//Activate Global Interrupt
+ 11c:	78 94       	sei
+	
+	
+
+	while (1)
+	{
+			if(counter%50 == 10)			{
+ 11e:	90 91 84 01 	lds	r25, 0x0184	; 0x800184 <counter>
+ 122:	89 e2       	ldi	r24, 0x29	; 41
+ 124:	98 9f       	mul	r25, r24
+ 126:	81 2d       	mov	r24, r1
+ 128:	11 24       	eor	r1, r1
+ 12a:	86 95       	lsr	r24
+ 12c:	86 95       	lsr	r24
+ 12e:	86 95       	lsr	r24
+ 130:	22 e3       	ldi	r18, 0x32	; 50
+ 132:	82 9f       	mul	r24, r18
+ 134:	90 19       	sub	r25, r0
+ 136:	11 24       	eor	r1, r1
+ 138:	9a 30       	cpi	r25, 0x0A	; 10
+ 13a:	21 f4       	brne	.+8      	; 0x144 <main+0x7c>
+				//OCR1B = (5*50)-1;//250:1.0,2.0   ;  25:10,20  ;5:50,100
+				triangle(6);
+ 13c:	86 e0       	ldi	r24, 0x06	; 6
+ 13e:	0e 94 ab 01 	call	0x356	; 0x356 <triangle>
+ 142:	ed cf       	rjmp	.-38     	; 0x11e <main+0x56>
+			} 
+			else if(counter%50 == 0)			{
+ 144:	90 91 84 01 	lds	r25, 0x0184	; 0x800184 <counter>
+ 148:	89 e2       	ldi	r24, 0x29	; 41
+ 14a:	98 9f       	mul	r25, r24
+ 14c:	81 2d       	mov	r24, r1
+ 14e:	11 24       	eor	r1, r1
+ 150:	86 95       	lsr	r24
+ 152:	86 95       	lsr	r24
+ 154:	86 95       	lsr	r24
+ 156:	22 e3       	ldi	r18, 0x32	; 50
+ 158:	82 9f       	mul	r24, r18
+ 15a:	90 19       	sub	r25, r0
+ 15c:	11 24       	eor	r1, r1
+ 15e:	91 11       	cpse	r25, r1
+ 160:	de cf       	rjmp	.-68     	; 0x11e <main+0x56>
+				//OCR1B = (5*100)-1;
+				squera(3);
+ 162:	83 e0       	ldi	r24, 0x03	; 3
+ 164:	0e 94 e3 01 	call	0x3c6	; 0x3c6 <squera>
+ 168:	da cf       	rjmp	.-76     	; 0x11e <main+0x56>
+
+Disassembly of section .text.__vector_18:
+
+0000016a <__vector_18>:
+
+volatile static uint8_t rx_buffer[RX_BUFFER_SIZE] = {0};
+volatile static uint16_t rx_count = 0;
+volatile static uint8_t uart_tx_busy = 1;
+
+ISR(USART_RX_vect){
+ 16a:	1f 92       	push	r1
+ 16c:	0f 92       	push	r0
+ 16e:	0f b6       	in	r0, 0x3f	; 63
+ 170:	0f 92       	push	r0
+ 172:	11 24       	eor	r1, r1
+ 174:	8f 93       	push	r24
+ 176:	9f 93       	push	r25
+ 178:	ef 93       	push	r30
+ 17a:	ff 93       	push	r31
+	
+	volatile static uint16_t rx_write_pos = 0;
+	
+	rx_buffer[rx_write_pos] = UDR0;
+ 17c:	e0 91 80 01 	lds	r30, 0x0180	; 0x800180 <rx_write_pos.1652>
+ 180:	f0 91 81 01 	lds	r31, 0x0181	; 0x800181 <rx_write_pos.1652+0x1>
+ 184:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 188:	e0 50       	subi	r30, 0x00	; 0
+ 18a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 18c:	80 83       	st	Z, r24
+	rx_count++;
+ 18e:	80 91 82 01 	lds	r24, 0x0182	; 0x800182 <rx_count>
+ 192:	90 91 83 01 	lds	r25, 0x0183	; 0x800183 <rx_count+0x1>
+ 196:	01 96       	adiw	r24, 0x01	; 1
+ 198:	90 93 83 01 	sts	0x0183, r25	; 0x800183 <rx_count+0x1>
+ 19c:	80 93 82 01 	sts	0x0182, r24	; 0x800182 <rx_count>
+	rx_write_pos++;
+ 1a0:	80 91 80 01 	lds	r24, 0x0180	; 0x800180 <rx_write_pos.1652>
+ 1a4:	90 91 81 01 	lds	r25, 0x0181	; 0x800181 <rx_write_pos.1652+0x1>
+ 1a8:	01 96       	adiw	r24, 0x01	; 1
+ 1aa:	90 93 81 01 	sts	0x0181, r25	; 0x800181 <rx_write_pos.1652+0x1>
+ 1ae:	80 93 80 01 	sts	0x0180, r24	; 0x800180 <rx_write_pos.1652>
+	if(rx_write_pos >= RX_BUFFER_SIZE){
+ 1b2:	80 91 80 01 	lds	r24, 0x0180	; 0x800180 <rx_write_pos.1652>
+ 1b6:	90 91 81 01 	lds	r25, 0x0181	; 0x800181 <rx_write_pos.1652+0x1>
+ 1ba:	80 38       	cpi	r24, 0x80	; 128
+ 1bc:	91 05       	cpc	r25, r1
+ 1be:	20 f0       	brcs	.+8      	; 0x1c8 <__vector_18+0x5e>
+		rx_write_pos = 0;
+ 1c0:	10 92 81 01 	sts	0x0181, r1	; 0x800181 <rx_write_pos.1652+0x1>
+ 1c4:	10 92 80 01 	sts	0x0180, r1	; 0x800180 <rx_write_pos.1652>
+	}
+	
+}
+ 1c8:	ff 91       	pop	r31
+ 1ca:	ef 91       	pop	r30
+ 1cc:	9f 91       	pop	r25
+ 1ce:	8f 91       	pop	r24
+ 1d0:	0f 90       	pop	r0
+ 1d2:	0f be       	out	0x3f, r0	; 63
+ 1d4:	0f 90       	pop	r0
+ 1d6:	1f 90       	pop	r1
+ 1d8:	18 95       	reti
+
+Disassembly of section .text.__vector_20:
+
+000003f6 <__vector_20>:
+
+
+ISR(USART_TX_vect){
+ 3f6:	1f 92       	push	r1
+ 3f8:	0f 92       	push	r0
+ 3fa:	0f b6       	in	r0, 0x3f	; 63
+ 3fc:	0f 92       	push	r0
+ 3fe:	11 24       	eor	r1, r1
+ 400:	8f 93       	push	r24
+	uart_tx_busy = 1;
+ 402:	81 e0       	ldi	r24, 0x01	; 1
+ 404:	80 93 89 01 	sts	0x0189, r24	; 0x800189 <uart_tx_busy>
+}
+ 408:	8f 91       	pop	r24
+ 40a:	0f 90       	pop	r0
+ 40c:	0f be       	out	0x3f, r0	; 63
+ 40e:	0f 90       	pop	r0
+ 410:	1f 90       	pop	r1
+ 412:	18 95       	reti
+
+Disassembly of section .text.uart_init:
+
+000001da <uart_init>:
+
+void uart_init(uint32_t baud,uint8_t high_speed){
+	
+	uint8_t speed = 16;
+	
+	if(high_speed != 0){
+ 1da:	44 23       	and	r20, r20
+ 1dc:	39 f0       	breq	.+14     	; 0x1ec <uart_init+0x12>
+		speed = 8;
+		UCSR0A |= 1 << U2X0;//set U2X0 to 1 for fast transtion
+ 1de:	e0 ec       	ldi	r30, 0xC0	; 192
+ 1e0:	f0 e0       	ldi	r31, 0x00	; 0
+ 1e2:	20 81       	ld	r18, Z
+ 1e4:	22 60       	ori	r18, 0x02	; 2
+ 1e6:	20 83       	st	Z, r18
+void uart_init(uint32_t baud,uint8_t high_speed){
+	
+	uint8_t speed = 16;
+	
+	if(high_speed != 0){
+		speed = 8;
+ 1e8:	a8 e0       	ldi	r26, 0x08	; 8
+ 1ea:	01 c0       	rjmp	.+2      	; 0x1ee <uart_init+0x14>
+}
+
+
+void uart_init(uint32_t baud,uint8_t high_speed){
+	
+	uint8_t speed = 16;
+ 1ec:	a0 e1       	ldi	r26, 0x10	; 16
+	if(high_speed != 0){
+		speed = 8;
+		UCSR0A |= 1 << U2X0;//set U2X0 to 1 for fast transtion
+	}
+	
+	baud = (F_CPU/(speed*baud)) - 1;
+ 1ee:	b0 e0       	ldi	r27, 0x00	; 0
+ 1f0:	9b 01       	movw	r18, r22
+ 1f2:	ac 01       	movw	r20, r24
+ 1f4:	0e 94 19 02 	call	0x432	; 0x432 <__muluhisi3>
+ 1f8:	9b 01       	movw	r18, r22
+ 1fa:	ac 01       	movw	r20, r24
+ 1fc:	60 e0       	ldi	r22, 0x00	; 0
+ 1fe:	74 e2       	ldi	r23, 0x24	; 36
+ 200:	84 ef       	ldi	r24, 0xF4	; 244
+ 202:	90 e0       	ldi	r25, 0x00	; 0
+ 204:	0e 94 69 01 	call	0x2d2	; 0x2d2 <__udivmodsi4>
+ 208:	ba 01       	movw	r22, r20
+ 20a:	a9 01       	movw	r20, r18
+ 20c:	41 50       	subi	r20, 0x01	; 1
+ 20e:	51 09       	sbc	r21, r1
+ 210:	61 09       	sbc	r22, r1
+ 212:	71 09       	sbc	r23, r1
+	
+	UBRR0H = (baud & 0x0F00) >> 8;
+ 214:	db 01       	movw	r26, r22
+ 216:	ca 01       	movw	r24, r20
+ 218:	88 27       	eor	r24, r24
+ 21a:	9f 70       	andi	r25, 0x0F	; 15
+ 21c:	aa 27       	eor	r26, r26
+ 21e:	bb 27       	eor	r27, r27
+ 220:	89 2f       	mov	r24, r25
+ 222:	9a 2f       	mov	r25, r26
+ 224:	ab 2f       	mov	r26, r27
+ 226:	bb 27       	eor	r27, r27
+ 228:	80 93 c5 00 	sts	0x00C5, r24	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+	UBRR0L = (baud & 0x00FF);
+ 22c:	40 93 c4 00 	sts	0x00C4, r20	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+	
+	UCSR0B |= (1 << TXEN0) | (1 << RXEN0) | (1 << TXCIE0) | (1 << RXCIE0);
+ 230:	e1 ec       	ldi	r30, 0xC1	; 193
+ 232:	f0 e0       	ldi	r31, 0x00	; 0
+ 234:	80 81       	ld	r24, Z
+ 236:	88 6d       	ori	r24, 0xD8	; 216
+ 238:	80 83       	st	Z, r24
+ 23a:	08 95       	ret
+
+Disassembly of section .text.uart_send_byte:
+
+0000045e <uart_send_byte>:
+	
+}
+
+
+void uart_send_byte(uint8_t c){
+	while(uart_tx_busy == 0);
+ 45e:	90 91 89 01 	lds	r25, 0x0189	; 0x800189 <uart_tx_busy>
+ 462:	99 23       	and	r25, r25
+ 464:	e1 f3       	breq	.-8      	; 0x45e <uart_send_byte>
+	uart_tx_busy = 0;
+ 466:	10 92 89 01 	sts	0x0189, r1	; 0x800189 <uart_tx_busy>
+	UDR0 = c;
+ 46a:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 46e:	08 95       	ret
+
+Disassembly of section .text.libgcc.div:
+
+000002d2 <__udivmodsi4>:
+ 2d2:	a1 e2       	ldi	r26, 0x21	; 33
+ 2d4:	1a 2e       	mov	r1, r26
+ 2d6:	aa 1b       	sub	r26, r26
+ 2d8:	bb 1b       	sub	r27, r27
+ 2da:	fd 01       	movw	r30, r26
+ 2dc:	0d c0       	rjmp	.+26     	; 0x2f8 <__udivmodsi4_ep>
+
+000002de <__udivmodsi4_loop>:
+ 2de:	aa 1f       	adc	r26, r26
+ 2e0:	bb 1f       	adc	r27, r27
+ 2e2:	ee 1f       	adc	r30, r30
+ 2e4:	ff 1f       	adc	r31, r31
+ 2e6:	a2 17       	cp	r26, r18
+ 2e8:	b3 07       	cpc	r27, r19
+ 2ea:	e4 07       	cpc	r30, r20
+ 2ec:	f5 07       	cpc	r31, r21
+ 2ee:	20 f0       	brcs	.+8      	; 0x2f8 <__udivmodsi4_ep>
+ 2f0:	a2 1b       	sub	r26, r18
+ 2f2:	b3 0b       	sbc	r27, r19
+ 2f4:	e4 0b       	sbc	r30, r20
+ 2f6:	f5 0b       	sbc	r31, r21
+
+000002f8 <__udivmodsi4_ep>:
+ 2f8:	66 1f       	adc	r22, r22
+ 2fa:	77 1f       	adc	r23, r23
+ 2fc:	88 1f       	adc	r24, r24
+ 2fe:	99 1f       	adc	r25, r25
+ 300:	1a 94       	dec	r1
+ 302:	69 f7       	brne	.-38     	; 0x2de <__udivmodsi4_loop>
+ 304:	60 95       	com	r22
+ 306:	70 95       	com	r23
+ 308:	80 95       	com	r24
+ 30a:	90 95       	com	r25
+ 30c:	9b 01       	movw	r18, r22
+ 30e:	ac 01       	movw	r20, r24
+ 310:	bd 01       	movw	r22, r26
+ 312:	cf 01       	movw	r24, r30
+ 314:	08 95       	ret
+
+Disassembly of section .text.libgcc.mul:
+
+00000432 <__muluhisi3>:
+ 432:	0e 94 0a 02 	call	0x414	; 0x414 <__umulhisi3>
+ 436:	a5 9f       	mul	r26, r21
+ 438:	90 0d       	add	r25, r0
+ 43a:	b4 9f       	mul	r27, r20
+ 43c:	90 0d       	add	r25, r0
+ 43e:	a4 9f       	mul	r26, r20
+ 440:	80 0d       	add	r24, r0
+ 442:	91 1d       	adc	r25, r1
+ 444:	11 24       	eor	r1, r1
+ 446:	08 95       	ret
+
+Disassembly of section .text.libgcc.mul:
+
+00000414 <__umulhisi3>:
+ 414:	a2 9f       	mul	r26, r18
+ 416:	b0 01       	movw	r22, r0
+ 418:	b3 9f       	mul	r27, r19
+ 41a:	c0 01       	movw	r24, r0
+ 41c:	a3 9f       	mul	r26, r19
+ 41e:	70 0d       	add	r23, r0
+ 420:	81 1d       	adc	r24, r1
+ 422:	11 24       	eor	r1, r1
+ 424:	91 1d       	adc	r25, r1
+ 426:	b2 9f       	mul	r27, r18
+ 428:	70 0d       	add	r23, r0
+ 42a:	81 1d       	adc	r24, r1
+ 42c:	11 24       	eor	r1, r1
+ 42e:	91 1d       	adc	r25, r1
+ 430:	08 95       	ret
+
+Disassembly of section .text.__dummy_fini:
+
+00000478 <_fini>:
+ 478:	08 95       	ret
+
+Disassembly of section .text.__dummy_funcs_on_exit:
+
+0000047a <__funcs_on_exit>:
+ 47a:	08 95       	ret
+
+Disassembly of section .text.__dummy_simulator_exit:
+
+0000047c <__simulator_exit>:
+ 47c:	08 95       	ret
+
+Disassembly of section .text.exit:
+
+00000448 <exit>:
+ 448:	ec 01       	movw	r28, r24
+ 44a:	0e 94 3d 02 	call	0x47a	; 0x47a <__funcs_on_exit>
+ 44e:	0e 94 3c 02 	call	0x478	; 0x478 <_fini>
+ 452:	ce 01       	movw	r24, r28
+ 454:	0e 94 3e 02 	call	0x47c	; 0x47c <__simulator_exit>
+ 458:	ce 01       	movw	r24, r28
+ 45a:	0e 94 3a 02 	call	0x474	; 0x474 <_Exit>
+
+Disassembly of section .text._Exit:
+
+00000474 <_Exit>:
+ 474:	0e 94 62 00 	call	0xc4	; 0xc4 <_exit>
