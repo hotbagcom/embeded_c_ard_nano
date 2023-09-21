@@ -35,9 +35,7 @@ int main(void)
 	while(1)
     {
 		convert = adc_convert(); // Store the analog to digital value 
-        //float volts = ADC_VOLT(convert);
-		//memset(printfbuffer , 0 , sizeof(printfbuffer));
-		//sprintf((char*)printfbuffer , "ADC res: 0%04x  Volt: 0%0.2f" , convert,volts);
+
 		
 		PORTD = (PORTD & 0x0F) & ((convert & 0x00F)<<4);
 		PORTB = (PORTB & 0xC0) & ((convert & 0x3F0)>>4);
