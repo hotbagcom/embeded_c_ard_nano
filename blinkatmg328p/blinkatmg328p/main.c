@@ -13,8 +13,8 @@
 
 int main(void)
 {
-	DDRC = 0xFF; //Nakes PORTC0 as Output
-	
+	DDRC = 0xFF; //Makes PORTC as Output
+	PORTC = 0x00; //Makes all PORTC Pins LOW 
 	 
     while(1)
     {
@@ -32,6 +32,5 @@ int main(void)
 		PORTC = 0x30; //12  0b0011 0000
 		_delay_ms(1000); //1 second delay
 		
-        //TODO:: Please write your application code 
     }
 }
