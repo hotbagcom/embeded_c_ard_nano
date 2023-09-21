@@ -16,12 +16,13 @@
 void hard(uint8_t input);				
 
 int main()
-{	//I made a mistake in here by using D0 and D1 pins 
+{	//I made a mistake by using D0 and D1 pins 
 	//Which used by atmega 328p chip as UART connection
+	//be careful using Port D 
 	//so that I am using D 4,5,6,7 as A,B,C,D AND D 8,9,10,11 as E,F,G,(DP)
+	//				 PortD 4,5,6,7			  PortB 0,1, 2, 3
 	
-	DDRD =0b01111111;	//0b(DP)GFEDCBA 
-						//DP for Dot Point but I did not use 
+	//DP for Dot Point but I did not use 
 	
 	uint8_t	 SSdp[10]={  
 					0b0111111,//0
@@ -52,11 +53,6 @@ int main()
 }
 
 void hard(uint8_t input){
-	DDRD = 0xF0; //I am not using D 0,1,2 and 3 pins , D 4,5,6,7 are out put from my chip
-	DDRB = 0x0F; //I'm given D 8,9,10 and 11 pins as output
-	PORTD = 0x00; //using this post for last four input bit
-	PORTB = 0x00; //using this post for first four input bit
-	
 	PORTB = (0x0F & input);		//take only first four bit 
 	PORTD = (0xF0 & input);		//take only last four bit
 }	
