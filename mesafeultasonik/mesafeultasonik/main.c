@@ -73,7 +73,7 @@ void Port_Init(){
 	DDRB =0b101111;
 	PORTB |=(1<<RST) | (1<<SS);
 	
-	DDRD =0xF7;  //portd3 as input INT1
+	DDRD =0x10;  //portd3 as input INT1
 	PORTD =0x00; //all are low 
 	EIMSK |=(1<<INT1) ;
 	EICRA |=(1<<ISC10);
@@ -87,7 +87,7 @@ ISR(INT1_vect){
 unsigned char hc_sr04_meas(void){
 	hc_sr04_cnt =0;
 	PORTD |= 1<< 4;			//set echo
-	_delay_ms(10);				//for 10ms
+	_delay_us(10);				//for 10ms
  	PORTD &=~(1<<4);		//clear echo
 	 
 	while(hc_sr04_cnt==0) ;
@@ -119,11 +119,24 @@ void Display_Cmnd(unsigned char data){
 void Display_Init(){
 	Display_Reset();//reset the display
 	Display_Cmnd(0x21); //cmnd set in addition mode
-	Display_Cmnd(0xC0); //set the voltage by sending C0 means VOP = 5V
-	Display_Cmnd(0x0F); //set the temp coefficient to 3
+
+	Display_Cmnd(0xC0); //set the voltage by sending C0 means VOP = 5V   
+//	Display_Cmnd(0x84); //set the voltage by sending C0 means VOP = 3.3V
+	
+
+	Display_Cmnd(0x07); //set the temp coefficient to 3 0b 0000 01 TC1 TC0
+	
 	Display_Cmnd(0x13); //set value of Voltage Bias System
+//	Display_Cmnd(0x15); //set value of Voltage Bias System
+	//bias hala benim için muamma
+	
 	Display_Cmnd(0x20); //command set in basic mode
-	Display_Cmnd(0x0c); //display result in normal mode 	
+//	Display_Cmnd(0x22); //command set in veryical mode
+	
+	Display_Cmnd(0x0c); //display result in normal mode 
+//	Display_Cmnd(0x08); //display result in blank mode 
+//	Display_Cmnd(0b00001001); //display result in all disp segment on mode	
+//	Display_Cmnd(0b00001101); //display result in inverse video mode	
 }
 void Display_SetXY(unsigned char X, unsigned char Y){
 	Display_Cmnd(0X80|X); //SET COLUM 0-83

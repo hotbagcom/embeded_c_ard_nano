@@ -42,27 +42,19 @@ static volatile uint16_t finish_time;
 unsigned char secound_tour;
 
 
-ISR(INT0_vect){///rising edge 
-	
-	start_time=0x00;
-	finish_time=0x00;
-	TCNT1 =0x00;
-	start_time =TCNT1;
-	
-}
+// ISR(INT0_vect){///rising edge 
+// 	start_time=0x00;
+// 	finish_time=0x00;
+// 	TCNT1 =0x00;
+// 	start_time =TCNT1;
+// }
+
+
 ISR(INT1_vect){//falling edge
 	finish_time =TCNT1;
 	
-	 if (finish_time<=start_time)
-	 {
-		 travel_time = ((2^16)-1)-(start_time-finish_time);
-		 
-	 }
-	 else if(finish_time>start_time)
-	 {
-		 travel_time = (finish_time-start_time);
-	 }
-	TCCR1B=0x00;
+	travel_time = (finish_time-start_time);
+
 	allov_trig_send=0x01;
 	secound_tour =0x01;
 	
@@ -86,7 +78,7 @@ int main(void)
 	uart_init(9600,0);
 	
 	//define external interrupt
-	EIMSK = 1<<INT1 | 1<<INT0 ; //activate int1  and int0   ---permanent
+	EIMSK = 1<<INT1;// | 1<<INT0 ; //activate int1  and int0   ---permanent
 	
 	
 	EICRA = 0b1011; // INT1 falling active ,INT0 rising active ---permanent
@@ -111,24 +103,19 @@ int main(void)
 			   sprintf((char*)print_dist,"start : %u and finish : %u --distance: %u  ticks   \n \r",start_time, finish_time,travel_time);
 			   uart_send_string(print_dist);
 			   
-			   
-			   
 		   }
-		   
-		   U_S |= _TRIG;
-		   _delay_us(15);
-		   U_S &=~_TRIG;
-		   TCCR1B= prescaller;
+		   if (allov_trig_send)
+		   {
+			U_S |= _TRIG;
+			_delay_us(15);
+			U_S &=~_TRIG;
+			TCNT1 =0x00;
+			start_time =TCNT1;
 		  
 		   allov_trig_send=0x00;
+		   }
+			
 	
 
-	   
-	   
-	   
-	   
-		
-	   
-	   
     }
 }

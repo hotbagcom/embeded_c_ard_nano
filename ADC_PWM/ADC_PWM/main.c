@@ -134,25 +134,24 @@ uint16_t ADC_Read(char channel)							/* ADC Read function */
 
 
 
-void adc_convrt_a_1(void){
+void adc_convrt_a_1 (uint8_t a){
 	
-	adc_pin_enable(0);
-	adc_pin_select(0);
-		
-		averall = (14*averall*(2^10) +  (((2^10)*(500*ADC_Read(0)))>>10));  ///875:125
-		averall = averall>>4;
-	a_1 = averall>>10;
-	adc_pin_disable(0);
+	adc_pin_enable(a);
+	adc_pin_select(a);
+		averall = (70*averall + 30*((500000*ADC_Read(a))>>10));
+		averall/=100;
+	a_1 = averall/1000;
+	adc_pin_disable(a);
 }
 
-void adc_convrt_b_1(void){
+void adc_convrt_b_1(uint8_t b){
 	
-	adc_pin_enable(1);
-	adc_pin_select(1);
-		bverall  = (70*bverall + 30*((500000*ADC_Read(1))>>10));
+	adc_pin_enable(b);
+	adc_pin_select(b);
+		bverall  = (70*bverall + 30*((500000*ADC_Read(b))>>10));
 		bverall/=100;
 	b_1 =bverall/1000;
-	adc_pin_disable(1);
+	adc_pin_disable(b);
 
 }
 
@@ -173,9 +172,9 @@ int main(void)
 	
 	while(1)
 	{
-		adc_convrt_a_1();
+		adc_convrt_a_1(4);
 		
-		adc_convrt_b_1();
+		adc_convrt_b_1(5);
 		
 		
 		OCR1A =a_1 +125;

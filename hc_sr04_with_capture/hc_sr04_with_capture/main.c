@@ -35,15 +35,15 @@
 
 uint8_t print_dist[40] ;
 uint32_t buffer_value[20];
-static volatile uint16_t distance_mm;
-static volatile uint16_t travel_distance ;
-static volatile uint32_t travel_time ;
-static  uint16_t cycle_tick_times;  //for overflow
-static volatile uint16_t start_time ;
-static volatile uint16_t finish_time;
+volatile uint16_t distance_mm;
+volatile uint16_t travel_distance ;
+volatile uint32_t travel_time ;
+uint16_t cycle_tick_times;  //for overflow
+volatile uint16_t start_time ;
+volatile uint16_t finish_time;
 
-static volatile short allow_trig_send;
-static volatile short allow_echo_read;
+static short allow_trig_send;
+static short allow_echo_read;
 
 
 void Ultros_Init();
@@ -131,7 +131,7 @@ int main(void)
 				
 					memset(print_dist,0,sizeof(print_dist));
 				
-					sprintf((char*)print_dist,"distance: %u  mm  _     \n \r",distance_mm);
+					sprintf((char*)print_dist,"distance: %u  mm  _  %lu tick  \n \r",distance_mm,travel_time);
 					//Led_Flash(cycle_tick_times);
 					uart_send_string(print_dist);
 					sample=0x00;
