@@ -32,13 +32,15 @@ int main(void)
 	lcdGoToSecondLineBegin();
 	while(1){
 		_delay_ms(800);
+		//chip goes to bed for 800 ms for properly seeing printing of the letters 
 		WRITE_LCD_Data(A);
-		//lcdGoToSecondLineBegin();
-		//lcdShiftDispLef();
-		_delay_ms(800);
+		//send A variable to displayer
 		
+		_delay_ms(800);
 		WRITE_LCD_Data(B);
-	
+	        //send B variable to displayer
+
+		//Because of I did not set cursor, letters will print next to next 
 	    }
 	
 	
