@@ -50,13 +50,12 @@ int main(void)
 	
 	
 	Set_pwm_value(5,10);
-	Set_pwm_value(6,10);
+	Set_pwm_value(6,50);
 	
 	int nn= 0;
+
 	while(1)
 	{
-		
-		
 		
 		//500(adc) ü 25(pwm) e sýðdýr
 		
@@ -69,11 +68,10 @@ int main(void)
 		}
 		
 			adc_convrt_a_1(nn);
-			adcpwm[nn]=(int)(a_1[nn]/25);
+			adcpwm[nn]=(int)(a_1[nn]/32);//20
 			nn++;
 			 
-		
-		 
-		 
     }
+	
+
 }

@@ -5,7 +5,7 @@
  *  Author: tnc
  */ 
 
-#define prescaller 0x5//prescaller 1024
+#define prescaller 0x5//prescaller 1024  0x4//prescaller 256
 
 #include <xc.h>
 #include <avr/io.h>
@@ -15,17 +15,17 @@ uint8_t timr0_width;
 volatile uint8_t timr0_ovf;
 static uint16_t OCR0[2]; 
 
-ISR(TIMER0_COMPA_vect){
-	OCR0A = 0xFF - (OCR0[0]/2);
-}
-ISR(TIMER0_COMPB_vect){
-	OCR0B = 0xFF - (OCR0[1]/2);
-}
+// ISR(TIMER0_COMPA_vect){
+// 	OCR0A = 0xFF - (OCR0[0]);
+// }
+// ISR(TIMER0_COMPB_vect){
+// 	OCR0B = 0xFF - (OCR0[1]);
+// }
 
 ISR(TIMER0_OVF_vect){
 	TCNT0= 0xff - timr0_width;  //0x200 - timr0_width*2 ;
-	OCR0B = 0xFF - (OCR0[1]/2);
-	OCR0A = 0xFF - (OCR0[0]/2);
+	OCR0B = 0xFF - (OCR0[1]);
+	OCR0A = 0xFF - (OCR0[0]);
 	
 	//0;//arkadaþ dipte kndini tcnt0 konumuna atýyo 
 	//ve bu nedenle düþüþtekini ayarlayamýyoruz, 
@@ -79,9 +79,9 @@ void Init_pwm(){
 void Set_pwm_value(short pin , uint16_t new_value){
 	
 		switch(pin)
-		{
-			case 5:OCR0[0] = 10+ (new_value);break;
-			case 6:OCR0[1] = 10+ (new_value);break;
+		{//elden geçmesi lazým
+			case 5:OCR0[0] = 3+ (new_value);break;
+			case 6:OCR0[1] = 3+ (new_value);break;
 		}
 		
 	

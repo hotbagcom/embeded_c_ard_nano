@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="pwm_tmr0.elf">                 
+  <executable name="pwm_timer0_ovf.elf">                 
     <memory name="program">              
       <units>bytes</units>                 
       <length>32768</length>                 
-      <used>1265</used>                     
-      <free>31503</free>                     
+      <used>1319</used>                     
+      <free>31449</free>                     
     </memory>                              
     <memory name="data">                 
       <units>bytes</units>                 
       <length>2048</length>                 
-      <used>45</used>                     
-      <free>2003</free>                     
+      <used>46</used>                     
+      <free>2002</free>                     
     </memory>                              
   </executable>                            
 </project>                                 
