@@ -4,6 +4,21 @@
  * Created: 9/30/2023 12:56:53 PM
  *  Author: tnc
  */ 
+/*			Fclock(Hz)
+formul ->    	------------------------------    =  Fout(Hz)
+		(prescallar + 1) * (counter+1) 
+ example  
+  Fclock(Hz) = 64 MHz
+  counter = 0 to 63999//this value is not for arduino , this is just an example
+  prescaller = 19
+  Fout = 50 Hz
+180 degree servo (we can control 0 degree to 215 degree)
+servo working frequencyis 50 Hz and single wave time length is 20 ms
+In datasheet says duty length should be 1 ms to 2 ms. /// [0-180]degree
+How ever on my research with osciloscope working range is 
+0.27 ms to 2.7 ms , for one period (20 ms) produce 64000 wave so that 860th wave to 8650th wave is my operating range 
+
+*/
 
 #define  F_CPU 16000000UL
 
@@ -58,7 +73,7 @@ int main(void)
 		
 		
 		
-		//500(adc) ü 25(pwm) e sýðdýr
+		//500(adc) Ã¼ 25(pwm) e sÃ½Ã°dÃ½r
 		
 		if (adc_convert_done)
 		{
