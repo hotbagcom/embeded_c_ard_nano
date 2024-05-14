@@ -13,9 +13,9 @@
 // ineterrupt pins 2 and 3 to count use timer 1
 //use tx and rx for 0 and 1
 
-#ifndef
+
 #define F_CPU 16000000UL
-#endif
+
 
 
 #include <xc.h>
@@ -27,14 +27,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "config.h"
 #include "PWM_.h"
 
 
 int main(void)
 {
+	
     //use the PWM_ functions
-	
-	
+	pwmdef_freq(0,25000);
+	pwmdef_pin(5);
     while (1) 
     {
     }
