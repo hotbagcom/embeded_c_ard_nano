@@ -9,7 +9,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#ifndef
+#ifndef F_CPU
 #define F_CPU 16000000UL
 #endif
 

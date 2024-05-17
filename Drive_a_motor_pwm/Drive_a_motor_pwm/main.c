@@ -18,8 +18,6 @@
 
 
 
-#include <xc.h>
-#include <util/delay.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <stdint.h>
@@ -30,6 +28,15 @@
 #include "config.h"
 #include "PWM_.h"
 
+static ui32 periode = 0;
+static ui8 position = 0; //0-256
+ISR(INT0_vect){//activate falling edge of input signal (when you release push button)
+	periode=getTCNT1();
+	
+}
+ISR(INT1_vect){//activate any logic chance of input signal
+	position = periode - getTCNT1();
+}
 
 int main(void)
 {
@@ -37,6 +44,24 @@ int main(void)
     //use the PWM_ functions
 	pwmdef_freq(0,25000);
 	pwmdef_pin(5);
+	
+	//pd2/pd3 //extrnal interrupt
+	DDRD |= 0b11<<2;
+	EICRA = 0x06;//0b0000 0110
+	//masks ISC11 and ISC10  ISC01 and ISC00 .
+	//ISC1x is logic change interrupt
+	//ISC0x is falling edge interrupt
+	//0b (INT1)01[any logical change] (INT0)10[_falling]
+		
+	EIMSK = 0x03; // enable int1 and int0
+	//Enable interrupt mask register
+		
+	sei();
+		
+	
+	
+	setOCR0B(20);
+	
     while (1) 
     {
     }
