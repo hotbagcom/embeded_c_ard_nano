@@ -1,0 +1,223 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+/// conig file
+#ifndef F_CPU
+#define F_CPU 16000000UL
+#endif
+
+#define ui8  uint8_t
+#define ui16  uint16_t
+#define ui32  uint32_t
+#define uc8  unsigned char
+
+///personal variable
+#define RX_BUFFER_SIZE 128
+volatile static ui8 rx_buffer[RX_BUFFER_SIZE] = {0};
+volatile static ui16 rx_count = 0;
+volatile static ui8 uart_tx_busy = 1;
+static ui16  timer1temp = 0;
+static ui16  quar_periode = 0; 
+
+
+ui8 print_disk[40] ;
+ui16 desired_tick = 5000 ; //rpm //adc değerini bununla bağlantıla 
+ui16 encoder_tick= 1000;  //prescaler değerine göre o frekansta yapılan tik değeri 
+
+//kesmeler
+  ISR(INT0_vect) {
+    
+  quar_periode = getTCNT1() - timer1temp;
+
+  timer1temp=getTCNT1();
+      
+    
+  }
+  ISR(INT1_vect) {
+      //
+  }
+  ISR(USART_RX_vect){
+    
+    volatile static ui16 rx_write_pos = 0;
+    
+    rx_buffer[rx_write_pos] = UDR0;
+    rx_count++;
+    rx_write_pos++;
+    if(rx_write_pos >= RX_BUFFER_SIZE){
+      rx_write_pos = 0;
+    }
+    
+  }
+  ISR(USART_TX_vect){
+    uart_tx_busy = 1;
+  }
+
+//functions
+///interrupt functions 
+  void setup_interrupts() {
+    // Configure external interrupts INT0 (PD2) and INT1 (PD3) to trigger on rising edge
+    EICRA = (1 << ISC01) | (1 << ISC00) | (1 << ISC11) | (1 << ISC10);
+    EIMSK = (1 << INT0) | (1 << INT1); // Enable INT0 and INT1
+  }
+///pwm functions
+  void setOCR1A(uint16_t duty_cycle) {
+      OCR1A = duty_cycle; // Set the duty cycle
+  }
+  ui16 getTCNT1(void){
+    return (TCNT1L)|(TCNT1H <<8);
+  }
+  void setup_timer1() {
+    // Set Fast PWM mode with ICR1 as top
+    TCCR1A = (1 << WGM11) | (1 << COM1A1); // Mode 14: Fast PWM, TOP = ICR1, Clear OC1A on Compare Match
+    TCCR1B = (1 << WGM13) | (1 << WGM12) | (1 << CS10); // No prescaling, start the timer
+    ICR1 = 2000; // Set TOP value to 2000
+    DDRB |= (1 << PB1); // Set PB1 (pin 9) as output
+  }
+///UART function
+
+  void uart_init(uint32_t baud,uint8_t high_speed){
+    
+    uint8_t speed = 16;
+    
+    if(high_speed != 0){
+      speed = 8;
+      UCSR0A |= 1 << U2X0;//set U2X0 to 1 for fast transtion
+    }
+    
+    baud = (F_CPU/(speed*baud)) - 1;
+    
+    UBRR0H = (baud & 0x0F00) >> 8;
+    UBRR0L = (baud & 0x00FF);
+    
+    UCSR0B |= (1 << TXEN0) | (1 << RXEN0) | (1 << TXCIE0) | (1 << RXCIE0);
+  }
+  void uart_send_byte(uint8_t c){
+    while(uart_tx_busy == 0);
+    uart_tx_busy = 0;
+    UDR0 = c;
+  }
+  void uart_send_string(uint8_t *c){
+    uint16_t i = 0;
+    do{
+      uart_send_byte(c[i]);
+      i++;
+      
+    }while(c[i] != '\0');
+    uart_send_byte(c[i]);
+  }
+  uint16_t uart_read_count(void){
+    return rx_count;
+  }
+  ui16 uart_read(void){
+    static uint16_t rx_read_pos = 0;
+    ui16 data = 0;
+    
+    data = rx_buffer[rx_read_pos];
+    rx_read_pos++;
+    rx_count--;
+    if(rx_read_pos >= RX_BUFFER_SIZE){
+      rx_read_pos = 0;
+    }
+    return data;
+  }
+
+
+
+///state machine function
+  void check_rpm(){
+    if(encoder_freq <desired_freq+20){
+      setOCR0B(ocr0b++);
+    }
+    else if(encoder_freq >desired_freq -20 )
+      setOCR0B(ocr0b--);
+  }
+  ui16 get_Encodefreq(){
+    return encoder_freq;
+  }
+  void send_uart(){
+    memset(print_disk,0,sizeof(print_disk));
+		//	   sprintf((char*)print_disk," desired frquency %lu and encoder freq : %lu  \n \r",desired_freq  ,encoder_freq );
+			  sprintf((char*)print_disk," desired frquency :  and encoder freq : \n \r" );
+			   uart_send_string(print_disk);
+  }
+
+
+int main() {
+    cli(); // Disable global interrupts
+
+    setup_timer1();
+    setup_interrupts();
+    DDRD |= 0x02; //0b00000010
+	  uart_init(9600,0);
+
+    sei(); // Enable global interrupts
+}
+
+void loop() {
+
+  encoder_freq = get_quadrafreq();
+  desired_freq = uart_read();
+  send_uart();//sends the values
+}
+//////////
+/*
+desired    O      pwm out
+          encodefrq in
+
+*/
+ICR1 = 1999;
+static ui16  encode_quar_freq = 0; //freq / tick_count  (input) 
+static ui16 pwmfreq = F_CPU / (ICR1+1); //pwm (output)
+
+//encoder değerlerini oku
+ISR(INT0_vect){//activate interrupt any logic chance of input signal  
+  timer1temp2=getTCNT1();
+
+  if(timer1temp2>timer1temp1)
+    encode_quar_freq = timer1temp2 - timer1temp1;
+  else if(timer1temp1>timer1temp2)
+    encode_quar_freq = ICR1 - timer1temp1 + timer1temp2 ;
+  else{}
+  
+  timer1temp1=getTCNT1();
+  encodefreq_2_rpm(encode_quar_freq);//calculate motor frequency based on rpm unit
+}
+ISR(INT1_vect){//activate interrupt any logic chance of input signal
+  timer1temp2=getTCNT1();
+
+  if(timer1temp2>timer1temp1)
+    encode_quar_freq = timer1temp2 - timer1temp1;
+  else if(timer1temp1>timer1temp2)
+    encode_quar_freq = ICR1 - timer1temp1 + timer1temp2 ;
+  else{} 
+  
+  timer1temp1=getTCNT1();
+  encodefreq_2_rpm(encode_quar_freq);//calculate motor frequency based on rpm unit
+}
+
+
+////functions
+
+//encoder _ external interrupt
+  void init_externalinterrupts() {
+    // Configure external interrupts INT0 (PD2) and INT1 (PD3) to trigger on rising edge
+    EICRA =| (1 << ISC00) | (1 << ISC10); // interrupt 1 (01 - logic change) interrupt 0 (01 - logic change)
+    EIMSK = (1 << INT0) | (1 << INT1); // Enable INT0 and INT1
+    DDRB |= (1 << PB1);
+  }
+
+// pwm  _ 16bit ICR1 0-1999 , pwm freq = 8kHz  ///(2nd option not active ) 2nd option ICR1 0-7999 , pwm freq = 2kHz(for more precise full encoder freq calcuation)
+  void setup_timer1() {
+    // Set Fast PWM mode with ICR1 as top
+    TCCR1A = (1 << WGM11) | (1 << COM1A1); // Mode 14: Fast PWM, TOP = ICR1, Clear OC1A on Compare Match
+    TCCR1B = (1 << WGM13) | (1 << WGM12) | (1 << CS10); // No prescaling, start the timer
+    ICR1 = 2000; // Set TOP value to 2000 // 
+    //
+// Is ICR1 should be 1999 or 2000 test with osciloskop
+    //
+    DDRB |= (1 << PB1); // Set PB1 (pin 9) as output
+  }
+
+
+
+
