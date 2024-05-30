@@ -159,7 +159,7 @@ void loop() {
   desired_freq = uart_read();
   send_uart();//sends the values
 }
-//////////
+////////////////////////////////////////////////////
 
 
 
@@ -327,8 +327,174 @@ void loop(){
 }
 
 
+//////////////////////////////////////////////////
 
 
 
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <string.h>
+#include <stdio.h>
 
+#define ui8  uint8_t
+#define ui16  uint16_t
+#define ui32  uint32_t
+#define uc8  unsigned char
+
+#define PI 22/7
+
+static ui16 encode_quar_freq = 0;
+static ui16 desired_encode_Qfreq = 500;
+static ui16 adjusted_pwmduty_ = 0;
+#define step_PID_size  2
+#define shmit_trig 40
+#define ICR1_max 8000 
+static ui16 timer1temp2;
+static ui16 timer1temp1;
+
+// UART variables
+#define RX_BUFFER_SIZE 128
+volatile static ui8 rx_buffer[RX_BUFFER_SIZE] = {0};
+volatile static ui16 rx_count = 0;
+volatile static ui8 uart_tx_busy = 1;
+ui8 print_disk[40];
+ui16 temp1 = 1000;
+int pm_ = -100;
+ISR(TIMER1_COMPA_vect){
+  if(temp1>7000)
+    pm_ = 100;
+  if(temp1<500)
+    pm_ = -100;
+  
+  temp1 = temp1 + pm_;
+  setOCR1A(temp1);
+}
+
+ISR(INT0_vect) {
+    timer1temp2 = getTCNT1();
+    if (timer1temp2 > timer1temp1)
+        encode_quar_freq = timer1temp2 - timer1temp1;
+    else if (timer1temp1 > timer1temp2)
+        encode_quar_freq = ICR1_max - timer1temp1 + timer1temp2;
+    timer1temp1 = getTCNT1();
+}
+
+ISR(INT1_vect) {
+    timer1temp2 = getTCNT1();
+    if (timer1temp2 > timer1temp1)
+        encode_quar_freq = timer1temp2 - timer1temp1;
+    else if (timer1temp1 > timer1temp2)
+        encode_quar_freq = ICR1_max - timer1temp1 + timer1temp2;
+    timer1temp1 = getTCNT1();
+}
+
+void init_externalinterrupts() {
+    DDRB &= ~(1 << PD2) | (1 << PD3); // Set PD2 and PD3 as input
+    EICRA = (1 << ISC00) | (1 << ISC10); // Trigger on any logical change
+    EIMSK = (1 << INT0) | (1 << INT1); // Enable INT0 and INT1
+    DDRB |= (1 << PB1); // Set PB1 as output
+}
+
+void init_timer1() {
+    DDRB |= (1 << PB1); // Set PB1 (pin 9) as output
+    TCCR1A = (1 << WGM11) | (1 << COM1A1); // Fast PWM mode, clear on compare match
+    TCCR1B = (1 << WGM13) | (1 << WGM12) | (1 << CS10); // Fast PWM, prescaler = 1
+    TIMSK1 = (1<<OCIE1A);
+    ICR1 = ICR1_max; // Set TOP value for 8 kHz
+}
+
+void uart_init(uint32_t baud, uint8_t high_speed) {
+    DDRD |= 0x02; // Set TX pin as output
+    uint8_t speed = 16;
+    if (high_speed != 0) {
+        speed = 8;
+        UCSR0A |= 1 << U2X0; // Double speed mode
+    }
+    baud = (F_CPU / (speed * baud)) - 1;
+    UBRR0H = (baud & 0x0F00) >> 8;
+    UBRR0L = (baud & 0x00FF);
+    UCSR0B |= (1 << TXEN0) | (1 << RXEN0) | (1 << TXCIE0) | (1 << RXCIE0);
+}
+
+void uart_send_byte(uint8_t c) {
+    while (uart_tx_busy == 0);
+    uart_tx_busy = 0;
+    UDR0 = c;
+}
+
+void uart_send_string(uint8_t *c) {
+    uint16_t i = 0;
+    do {
+        uart_send_byte(c[i]);
+        i++;
+    } while (c[i] != '\0');
+    uart_send_byte(c[i]);
+}
+
+uint16_t uart_read_count(void) {
+    return rx_count;
+}
+
+ui16 uart_read(void) {
+    static uint16_t rx_read_pos = 0;
+    ui16 data = 0;
+    data = rx_buffer[rx_read_pos];
+    rx_read_pos++;
+    rx_count--;
+    if (rx_read_pos >= RX_BUFFER_SIZE) {
+        rx_read_pos = 0;
+    }
+    return data;
+}
+
+int main() {
+    init_externalinterrupts();
+    init_timer1();
+    uart_init(9600, 0);
+    sei(); // Enable global interrupts
+ setOCR1A(5500); // 75% duty cycle
+}
+////State machine
+//
+
+  ui16 getTCNT1(void) {
+      return (TCNT1L) | (TCNT1H << 8);
+  }
+
+  void setOCR1A(uint16_t tick) {
+      OCR1A = tick; // Set the duty cycle
+  }
+
+  void correct_rpm() {
+      if (encode_quar_freq < desired_encode_Qfreq - shmit_trig) {
+          setOCR1A(adjusted_pwmduty_ + step_PID_size);
+      } else if (encode_quar_freq > desired_encode_Qfreq + shmit_trig) {
+          setOCR1A(adjusted_pwmduty_ - step_PID_size);
+      }
+  }
+
+  ui16 get_Qencodefreq() {
+      return encode_quar_freq;
+  }
+
+  void send_uart() {
+      memset(print_disk, 0, sizeof(print_disk));
+      sprintf((char*)print_disk, " ocr1a : %d  \n \r",temp1);
+      uart_send_string(print_disk);
+  }
+
+  ui16 encodefreq_2_rpm() {
+      return (encode_quar_freq << 5) * 15 * PI;
+  }
+
+  ui16 rpm_2_encodefreq(int uart_rpmin) {
+      return (uart_rpmin >> 5) / (15 * PI);
+  }
+//
+void loop() {
+    // correct_rpm();
+    // desired_encode_Qfreq = rpm_2_encodefreq(uart_read());
+    send_uart();
+     
+}
 
